@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fcpo-frontend
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fcpo-frontend
+  template:
+    metadata:
+      labels:
+        app: fcpo-frontend
+    spec:
+      imagePullSecrets:
+      - name: ghcr-secret
+      containers:
+      - name: frontend
+        image: ghcr.io/areppzubaidi/fcpo-frontend:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fcpo-frontend
+  namespace: default
+spec:
+  selector:
+    app: fcpo-frontend
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort

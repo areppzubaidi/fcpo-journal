@@ -7,3 +7,4 @@ resources:
   - postgres/03-deployment.yaml
   - postgres/04-service.yaml
   - backend-deployment.yaml
+  - frontend-deployment.yaml
