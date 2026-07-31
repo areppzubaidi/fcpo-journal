@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: areppzubaidi/fcpo-backend:latest
+        image: ghcr.io/areppzubaidi/fcpo-backend:latest
         ports:
         - containerPort: 3000
         env:
