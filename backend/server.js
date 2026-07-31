@@ -47,6 +47,18 @@ app.get("/api/journals", async (req, res) => {
   res.json({ journals: result.rows, total: result.rows.length });
 });
 
+
+// Create a journal entry
+app.post("/api/journals", async (req, res) => {
+  const { title, authors, publication_date, download_date, month, year, publisher, doi, category, keywords, notes } = req.body;
+  const result = await pool.query(
+    `INSERT INTO journals (title, authors, publication_date, download_date, month, year, publisher, doi, category, keywords, notes)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+    [title, authors, publication_date, download_date, month, year, publisher, doi, category, keywords, notes]
+  );
+  res.status(201).json(result.rows[0]);
+});
+
 app.listen(PORT, () => {
   console.log(`FCPO Journal API running on port ${PORT}`);
 });
