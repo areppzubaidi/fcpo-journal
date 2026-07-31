@@ -13,6 +13,8 @@ spec:
       labels:
         app: fcpo-backend
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: backend
         image: ghcr.io/areppzubaidi/fcpo-backend:latest
